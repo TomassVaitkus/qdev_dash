@@ -14,6 +14,7 @@ green = filtering_function(data_df)[1]
 
 
 app = dash.Dash(__name__)
+server = app.server
 
 summary_df = pd.DataFrame({"Raudonos veikimo skaičius": [len(filtering_function(data_df)[0])],
                   "Geltonos veikimo skaičius": [len(filtering_function(data_df)[2])],
