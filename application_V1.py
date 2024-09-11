@@ -98,36 +98,36 @@ app.layout = html.Div([
     prevent_initial_call=True,
 )
 def func(n_clicks):
-    if n_clicks is None:  # Handle initial call
+    if n_clicks is None:  
         return None
 
-    # Create a new Excel workbook
+    
     workbook = openpyxl.Workbook()
 
-    # Add the summary DataFrame to the first sheet
+    
     sheet = workbook.active
     sheet.title = "Apibendrinimas"
-    for r in dataframe_to_rows(summary_df, index=True):  # Set index=True
+    for r in dataframe_to_rows(summary_df, index=True): 
         sheet.append(r)
 
-    # Add other DataFrames to separate sheets
+    
     for df, sheet_name in zip([red, yellow, green], ["Raudona", "Geltona", "Žalia"]):
         sheet = workbook.create_sheet(title=sheet_name)
-        for r in dataframe_to_rows(df, index=True):  # Set index=True
+        for r in dataframe_to_rows(df, index=True):  
             sheet.append(r)
 
-    # Save the workbook to a BytesIO object
+    
     output = io.BytesIO()
     workbook.save(output)
     output.seek(0)
 
-    # Return the file content and trigger the download
+    
     return dcc.send_bytes(
         output.getvalue(), 
         "lenteles.xlsx"
     )
 
-# Helper function to convert DataFrame to rows 
+
 def dataframe_to_rows(df, index=True):
     if index:  
         yield list(df.columns)
