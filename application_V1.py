@@ -13,7 +13,7 @@ yellow = filtering_function(data_df)[2]
 green = filtering_function(data_df)[1]
 
 
-app = Dash()
+app = dash.Dash(__name__)
 
 summary_df = pd.DataFrame({"Raudonos veikimo skaičius": [len(filtering_function(data_df)[0])],
                   "Geltonos veikimo skaičius": [len(filtering_function(data_df)[2])],
@@ -136,4 +136,4 @@ def dataframe_to_rows(df, index=True):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run_server(debug=True)
